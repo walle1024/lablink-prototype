@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabLink – Build Your Profile</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo"><a href="/" style="color:inherit;text-decoration:none;">LabLink</a></div>
+            <nav>
+                <a href="/pages/candidate-profile.html" class="nav-link active">Find a Lab</a>
+                <a href="#" class="nav-link">Register Lab</a>
+                <a href="#" class="nav-link">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== FORM PAGE ===== -->
+    <main class="form-page">
+        <div class="container form-container">
+            <h1>Build Your Research Profile</h1>
+            <p class="form-intro">Complete all sections below. Your answers power our matching algorithm and AI.</p>
+
+          
+            <form id="profileForm">
+
+                <!-- SECTION 1: About You -->
+                <fieldset class="form-section">
+                    <legend>1. About You</legend>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="educationLevel">Education Level *</label>
+                            <select id="educationLevel" required>
+                                <option value="">Select...</option>
+                                <option value="Freshman">Freshman</option>
+                                <option value="Sophomore">Sophomore</option>
+                                <option value="Junior">Junior</option>
+                                <option value="Senior">Senior</option>
+                                <option value="Postbac">Postbac</option>
+                                <option value="MS">MS</option>
+                                <option value="PhD">PhD</option>
+                                <option value="Postdoc">Postdoc</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="gpaRange">GPA Range *</label>
+                            <select id="gpaRange" required>
+                                <option value="">Select...</option>
+                                <option value="3.8-4.0">3.8 – 4.0</option>
+                                <option value="3.5-3.7">3.5 – 3.7</option>
+                                <option value="3.0-3.4">3.0 – 3.4</option>
+                                <option value="2.5-2.9">2.5 – 2.9</option>
+                                <option value="<2.5">&lt; 2.5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experienceLevel">Experience Level *</label>
+                            <select id="experienceLevel" required>
+                                <option value="">Select...</option>
+                                <option value="No experience">No experience</option>
+                                <option value="Some coursework">Some coursework</option>
+                                <option value="Lab intern">Lab intern</option>
+                                <option value="Independent project">Independent project</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- SECTION 2: Research Interests -->
+                <fieldset class="form-section">
+                    <legend>2. Research Interests</legend>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="primaryField">Primary Field of Interest *</label>
+                            <select id="primaryField" required>
+                                <option value="">Select...</option>
+                                <option value="Neuroscience">Neuroscience</option>
+                                <option value="Computational Biology">Computational Biology</option>
+                                <option value="Cancer Biology">Cancer Biology</option>
+                                <option value="Biochemistry">Biochemistry</option>
+                                <option value="Structural Biology">Structural Biology</option>
+                                <option value="Public Health">Public Health</option>
+                                <option value="Pharmacology">Pharmacology</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="subdisciplines">Sub-disciplines (hold Ctrl/Cmd to multi-select)</label>
+                            <select id="subdisciplines" multiple>
+                                <option value="Neurodegeneration">Neurodegeneration</option>
+                                <option value="Cognitive Neuroscience">Cognitive Neuroscience</option>
+                                <option value="Epigenetics">Epigenetics</option>
+                                <option value="Cancer Biology">Cancer Biology</option>
+                                <option value="Drug Discovery">Drug Discovery</option>
+                                <option value="Bioinformatics">Bioinformatics</option>
+                                <option value="Epidemiology">Epidemiology</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- SECTION 3: Your Skills -->
+                <fieldset class="form-section">
+                    <legend>3. Your Skills</legend>
+                    <div class="form-group skill-group">
+                        <label for="skillName">Add a Technique *</label>
+                        <div class="skill-input-row">
+                            <input type="text" id="skillName" placeholder="e.g. PCR, Python, Flow Cytometry" />
+                            <select id="skillProficiency">
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate" selected>Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                                <option value="Expert">Expert</option>
+                            </select>
+                            <button type="button" id="addSkillBtn" class="btn btn-secondary">+ Add</button>
+                        </div>
+                        <div id="skillList" class="skill-tag-container">
+                            
+                            <span class="skill-tag">PCR <span class="skill-proficiency">(Intermediate)</span> <span class="remove-skill" data-skill="PCR">×</span></span>
+                            <span class="skill-tag">Western Blot <span class="skill-proficiency">(Beginner)</span> <span class="remove-skill" data-skill="Western Blot">×</span></span>
+                        </div>
+                        <small>Click <strong>+ Add</strong> to add more. You can add unlimited skills.</small>
+                        
+                        <input type="hidden" id="confirmedSkills" value='[{"skill":"PCR","proficiency":"Intermediate"},{"skill":"Western Blot","proficiency":"Beginner"}]' />
+                    </div>
+                </fieldset>
+
+                <!-- SECTION 4: Your Goals -->
+                <fieldset class="form-section">
+                    <legend>4. Your Goals & Preferences</legend>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="careerGoal">Career Goal *</label>
+                            <select id="careerGoal" required>
+                                <option value="Academic PhD">Academic PhD</option>
+                                <option value="MD/PhD">MD/PhD</option>
+                                <option value="Industry">Industry</option>
+                                <option value="Government">Government</option>
+                                <option value="Teaching">Teaching</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Hours Available *</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="hours" value="Part-time" checked /> Part-time</label>
+                                <label><input type="radio" name="hours" value="Half-time" /> Half-time</label>
+                                <label><input type="radio" name="hours" value="Full-time" /> Full-time</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Compensation Need *</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="compensation" value="Paid" /> Paid</label>
+                                <label><input type="radio" name="compensation" value="For-credit" checked /> For-credit</label>
+                                <label><input type="radio" name="compensation" value="Unpaid" /> Unpaid</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Remote Preference</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="remote" value="In-person only" checked /> In-person only</label>
+                                <label><input type="radio" name="remote" value="Hybrid" /> Hybrid</label>
+                                <label><input type="radio" name="remote" value="Remote possible" /> Remote possible</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- SECTION 5: Research Statement  -->
+                <fieldset class="form-section ai-section">
+                    <legend>5. Tell Us About Your Research Interests <span class="ai-badge-small">AI</span></legend>
+                    <div class="form-group">
+                        <label for="researchStatement">Describe your research interests in your own words *</label>
+                        <textarea 
+                            id="researchStatement" 
+                            minlength="100" 
+                            required 
+                            placeholder="Describe what you want to study, why it excites you, and any relevant experience..."
+                        >I am deeply interested in understanding how protein aggregation leads to neuron death in Alzheimer's disease. I have hands-on experience with confocal microscopy and Western blotting and want to develop these skills in a dedicated neurodegeneration lab.</textarea>
+                        <p class="ai-hint">
+                            ✨ Our AI uses this to find labs whose work aligns with your interests — it understands synonyms and related concepts.
+                        </p>
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-large">🚀 Find My Lab Matches</button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <span>&copy; 2026 LabLink. All rights reserved.</span>
+            <nav>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+            </nav>
+        </div>
+    </footer>
+
+
+    <script>
+        document.getElementById('addSkillBtn').addEventListener('click', function() {
+            const nameInput = document.getElementById('skillName');
+            const profSelect = document.getElementById('skillProficiency');
+            const name = nameInput.value.trim();
+            if (!name) return alert('Please enter a skill name.');
+            const container = document.getElementById('skillList');
+            const tag = document.createElement('span');
+            tag.className = 'skill-tag';
+            tag.innerHTML = `${name} <span class="skill-proficiency">(${profSelect.value})</span> <span class="remove-skill">×</span>`;
+            container.appendChild(tag);
+            nameInput.value = '';
+            
+        });
+       
+        document.getElementById('skillList').addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-skill')) {
+                e.target.parentElement.remove();
+            }
+        });
+    </script>
+</body>
+</html>
