@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabLink – Your Match Results</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo"><a href="../index.html" style="color:inherit;text-decoration:none;">LabLink</a></div>
+            <nav>
+                <a href="../pages/candidate-profile.html" class="nav-link">Find a Lab</a>
+                <a href="#" class="nav-link">Register Lab</a>
+                <a href="#" class="nav-link">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== MAIN RESULTS ===== -->
+    <main class="results-page">
+        <div class="container">
+
+           
+            <div class="results-header">
+                <h1>Your Lab Matches</h1>
+                <p id="resultCount">We found <strong>0</strong> labs matching your profile.</p>
+            </div>
+
+      
+            <div id="loadingState" class="loading-state" style="display:none;">
+                <div class="spinner"></div>
+                <p>Our AI is analysing your research interests...</p>
+                <p class="loading-sub">This may take a few seconds while we compute semantic similarity.</p>
+            </div>
+
+           
+            <div id="emptyState" class="empty-state" style="display:none;">
+                <p>😕 No strong matches found yet.</p>
+                <p class="empty-hint">Try broadening your interests or adding more skills to your profile.</p>
+                <a href="../pages/candidate-profile.html" class="btn btn-primary">Edit Your Profile</a>
+            </div>
+
+       
+            <div id="resultsContainer" style="display:none;">
+               
+                <div class="results-toolbar">
+                    <div class="sort-group">
+                        <label for="sortSelect">Sort by:</label>
+                        <select id="sortSelect">
+                            <option value="combined">Combined Score</option>
+                            <option value="rule">Structure Only</option>
+                            <option value="ai">AI Semantic Only</option>
+                        </select>
+                    </div>
+                    <span id="resultCountInline"></span>
+                </div>
+
+               
+                <div id="labCardsContainer" class="lab-cards-grid"></div>
+            </div>
+
+        </div>
+    </main>
+
+   
+    <footer class="footer">
+        <div class="container footer-content">
+            <span>&copy; 2026 LabLink. All rights reserved.</span>
+            <span class="ai-attribution">Semantic matching powered by <strong>Cohere Embed AI</strong>.</span>
+            <nav>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // ----- DOM refs -----
+            const container = document.getElementById('labCardsContainer');
+            const loadingEl = document.getElementById('loadingState');
+            const emptyEl = document.getElementById('emptyState');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const resultCount = document.getElementById('resultCount');
+            const sortSelect = document.getElementById('sortSelect');
+
+            let allResults = [];
+
+            // ----- Helper: render cards -----
+            function renderCards(sortBy) {
+                if (!allResults || allResults.length === 0) {
+                    resultsContainer.style.display = 'none';
+                    emptyEl.style.display = 'block';
+                    return;
+                }
+
+              
+                const sorted = [...allResults];
+                if (sortBy === 'rule') {
+                    sorted.sort((a, b) => b.rulePercent - a.rulePercent);
+                } else if (sortBy === 'ai') {
+                    sorted.sort((a, b) => b.semanticPercent - a.semanticPercent);
+                } else { // combined (default)
+                    sorted.sort((a, b) => b.combinedPercent - a.combinedPercent);
+                }
+
+             
+                resultCount.innerHTML = `We found <strong>${sorted.length}</strong> labs matching your profile.`;
+
+               
+                let html = '';
+                sorted.forEach((item, index) => {
+                    const lab = item.lab || {};
+                    const topSkills = (item.topMatchedSkills || []).slice(0, 3).join(' · ') || 'No skill matches';
+
+                    html += `
+                        <div class="lab-card" data-index="${index}">
+                           
+                            <div class="score-badge-row">
+                                <span class="badge badge-teal">Structure: ${Math.round(item.rulePercent || 0)}%</span>
+                                <span class="badge badge-purple" data-tooltip="Powered by Cohere Embed AI – measures semantic similarity between your research interests and the lab's work.">
+                                    AI: ${Math.round(item.semanticPercent || 0)}%
+                                    <span class="tooltip-icon">ⓘ</span>
+                                    <span class="tooltip-text">Powered by Cohere Embed AI – measures semantic similarity between your research interests and the lab's work.</span>
+                                </span>
+                                <span class="badge badge-combined">Match: ${Math.round(item.combinedPercent || 0)}%</span>
+                            </div>
+
+                            
+                            <h3 class="lab-name">${lab.Lab_Name || 'Unknown Lab'}</h3>
+                            <p class="lab-meta">
+                                <span class="pill field-pill">${lab.Primary_Field || 'N/A'}</span>
+                                <span>${lab.Institution || ''}</span>
+                                <span>${lab.Hiree_Level || ''}</span>
+                            </p>
+                            <p class="lab-skills">Top matched skills: ${topSkills}</p>
+
+                           
+                            <div class="card-actions">
+                                <a href="lab-profile.html?id=${lab.Lab_ID || ''}" class="btn btn-outline btn-sm">View Lab Profile</a>
+                            </div>
+
+                           
+                            <details class="why-match-details">
+                                <summary>⭐ Why this match?</summary>
+                                <div class="why-match-grid">
+                                    <!-- 结构化匹配 -->
+                                    <div class="why-structured">
+                                        <h4 class="why-heading teal-heading">📊 Structured Match</h4>
+                                        <ul class="why-list">
+                                            ${(item.matchedPairs && item.matchedPairs.length > 0) 
+                                                ? item.matchedPairs.map(p => `<li>${p}</li>`).join('')
+                                                : '<li>No structured matches recorded.</li>'
+                                            }
+                                        </ul>
+                                    </div>
+                                   
+                                    <div class="why-ai">
+                                        <h4 class="why-heading purple-heading">🤖 AI Semantic Match</h4>
+                                        <p class="ai-percent">Similarity: <strong>${Math.round(item.semanticPercent || 0)}%</strong></p>
+                                        <p class="ai-reason">${item.semanticReason || 'Your statement and this lab\'s description discuss similar research topics.'}</p>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+                resultsContainer.style.display = 'block';
+                emptyEl.style.display = 'none';
+                loadingEl.style.display = 'none';
+            }
+
+            
+            function loadResults() {
+                
+                loadingEl.style.display = 'block';
+                resultsContainer.style.display = 'none';
+                emptyEl.style.display = 'none';
+
+                try {
+                    const stored = sessionStorage.getItem('labMatchResults');
+                    if (!stored) {
+                        loadingEl.style.display = 'none';
+                        emptyEl.style.display = 'block';
+                        return;
+                    }
+                    const parsed = JSON.parse(stored);
+                    if (!Array.isArray(parsed) || parsed.length === 0) {
+                        loadingEl.style.display = 'none';
+                        emptyEl.style.display = 'block';
+                        return;
+                    }
+                    allResults = parsed;
+                    loadingEl.style.display = 'none';
+                    renderCards('combined');
+                } catch (e) {
+                    console.error('Failed to load results:', e);
+                    loadingEl.style.display = 'none';
+                    emptyEl.style.display = 'block';
+                }
+            }
+
+         
+            sortSelect.addEventListener('change', function() {
+                renderCards(this.value);
+            });
+
+            
+            document.addEventListener('DOMContentLoaded', loadResults);
+
+           
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'labMatchResults') {
+                    loadResults();
+                }
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
