@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabLink – Lab Profile</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo"><a href="../index.html" style="color:inherit;text-decoration:none;">LabLink</a></div>
+            <nav>
+                <a href="../pages/candidate-profile.html" class="nav-link">Find a Lab</a>
+                <a href="#" class="nav-link">Register Lab</a>
+                <a href="#" class="nav-link">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== LAB PROFILE ===== -->
+    <main class="lab-profile-page">
+        <div class="container">
+
+
+            <div class="back-nav">
+                <a href="../pages/results.html" class="back-link">← Back to Results</a>
+            </div>
+
+            
+            <div id="profileLoading" class="loading-state">
+                <div class="spinner"></div>
+                <p>Loading lab profile...</p>
+            </div>
+
+          
+            <div id="profileError" class="empty-state" style="display:none;">
+                <p>😕 Lab not found.</p>
+                <a href="../pages/results.html" class="btn btn-primary">Back to Results</a>
+            </div>
+
+          
+            <div id="profileContent" style="display:none;">
+
+               
+                <div class="lab-header">
+                    <h1 id="labName">Lab Name</h1>
+                    <div class="lab-header-meta">
+                        <span id="labPI">PI Name</span>
+                        <span id="labInstitution">Institution</span>
+                        <span class="pill field-pill" id="labField">Field</span>
+                    </div>
+                </div>
+
+              
+                <section class="profile-section">
+                    <h2>About Our Research</h2>
+                    <p id="labDescription" class="lab-description-text">Loading description...</p>
+                </section>
+
+               
+                <section class="profile-section">
+                    <h2>Who We're Looking For</h2>
+                    <div class="info-grid">
+                        <div>
+                            <strong>Required Techniques</strong>
+                            <div id="requiredTechniques" class="pill-container"></div>
+                        </div>
+                        <div>
+                            <strong>Preferred Techniques</strong>
+                            <div id="preferredTechniques" class="pill-container"></div>
+                        </div>
+                        <div>
+                            <strong>Hiree Level</strong>
+                            <span id="hireeLevel">—</span>
+                        </div>
+                        <div>
+                            <strong>Hours / Week</strong>
+                            <span id="hoursPerWeek">—</span>
+                        </div>
+                        <div>
+                            <strong>Compensation</strong>
+                            <span id="compensation">—</span>
+                        </div>
+                    </div>
+                </section>
+
+               
+                <section class="profile-section">
+                    <h2>What We Offer</h2>
+                    <div class="info-grid">
+                        <div>
+                            <strong>Career Pathways</strong>
+                            <div id="careerPathways" class="pill-container"></div>
+                        </div>
+                        <div>
+                            <strong>Remote Option</strong>
+                            <span id="remoteOption">—</span>
+                        </div>
+                        <div>
+                            <strong>Lab Size</strong>
+                            <span id="labSize">—</span>
+                        </div>
+                    </div>
+                </section>
+
+                
+                <section id="scoreSection" class="profile-section score-section" style="display:none;">
+                    <h2>Your Match with This Lab</h2>
+                    <div class="score-badge-row score-badge-row-large">
+                        <span class="badge badge-teal">Structure: <span id="scoreRule">—</span>%</span>
+                        <span class="badge badge-purple">AI Semantic: <span id="scoreAI">—</span>%</span>
+                        <span class="badge badge-combined">Combined: <span id="scoreCombined">—</span>%</span>
+                    </div>
+                    <p class="score-hint">* Scores are based on your submitted profile. <a href="../pages/candidate-profile.html">Edit your profile</a> to see new matches.</p>
+                </section>
+
+                
+                <div class="profile-actions">
+                    <button class="btn btn-primary btn-large">📩 Apply Now</button>
+                    <button class="btn btn-outline btn-large">Save to Favorites</button>
+                </div>
+
+            </div><!-- end profileContent -->
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <span>&copy; 2026 LabLink. All rights reserved.</span>
+            <span class="ai-attribution">Semantic matching powered by <strong>Cohere Embed AI</strong>.</span>
+            <nav>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+           
+            function getParam(name) {
+                const params = new URLSearchParams(window.location.search);
+                return params.get(name);
+            }
+
+           
+            async function loadLabProfile() {
+                const labId = getParam('id');
+                if (!labId) {
+                    document.getElementById('profileLoading').style.display = 'none';
+                    document.getElementById('profileError').style.display = 'block';
+                    return;
+                }
+
+                try {
+                    
+                    const res = await fetch('/data/labs.json');
+                    if (!res.ok) throw new Error('Failed to fetch labs.json');
+                    const labs = await res.json();
+                    const lab = labs.find(l => l.Lab_ID === labId);
+                    if (!lab) {
+                        document.getElementById('profileLoading').style.display = 'none';
+                        document.getElementById('profileError').style.display = 'block';
+                        return;
+                    }
+
+                   
+                    document.getElementById('labName').textContent = lab.Lab_Name || 'Unnamed Lab';
+                    document.getElementById('labPI').textContent = lab.PI_Name || 'PI not listed';
+                    document.getElementById('labInstitution').textContent = lab.Institution || '';
+                    document.getElementById('labField').textContent = lab.Primary_Field || 'N/A';
+                    document.getElementById('labDescription').textContent = lab.Lab_Description_FreeText || 'No description available.';
+
+                   
+                    renderPills('requiredTechniques', lab.Required_Techniques);
+                    renderPills('preferredTechniques', lab.Preferred_Techniques);
+                    renderPills('careerPathways', lab.Career_Pathways);
+
+                    document.getElementById('hireeLevel').textContent = lab.Hiree_Level || '—';
+                    document.getElementById('hoursPerWeek').textContent = lab.Hours_Per_Week || '—';
+                    document.getElementById('compensation').textContent = lab.Compensation || '—';
+                    document.getElementById('remoteOption').textContent = lab.Remote_Option || '—';
+                    document.getElementById('labSize').textContent = lab.Lab_Size || '—';
+
+                    
+                    document.getElementById('profileLoading').style.display = 'none';
+                    document.getElementById('profileContent').style.display = 'block';
+
+                    
+                    try {
+                        const stored = sessionStorage.getItem('labMatchResults');
+                        if (stored) {
+                            const results = JSON.parse(stored);
+                            const match = results.find(r => r.lab && r.lab.Lab_ID === labId);
+                            if (match) {
+                                document.getElementById('scoreRule').textContent = Math.round(match.rulePercent || 0);
+                                document.getElementById('scoreAI').textContent = Math.round(match.semanticPercent || 0);
+                                document.getElementById('scoreCombined').textContent = Math.round(match.combinedPercent || 0);
+                                document.getElementById('scoreSection').style.display = 'block';
+                            }
+                        }
+                    } catch (e) {
+                        
+                        console.log('No score data available for this lab.');
+                    }
+
+                } catch (err) {
+                    console.error('Error loading lab profile:', err);
+                    document.getElementById('profileLoading').style.display = 'none';
+                    document.getElementById('profileError').style.display = 'block';
+                }
+            }
+
+           
+            function renderPills(containerId, items) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                if (!items || !Array.isArray(items) || items.length === 0) {
+                    container.innerHTML = '<span class="pill empty-pill">None listed</span>';
+                    return;
+                }
+                container.innerHTML = items.map(item => `<span class="pill">${item}</span>`).join('');
+            }
+
+            
+            document.addEventListener('DOMContentLoaded', loadLabProfile);
+        })();
+    </script>
+
+</body>
+</html>
