@@ -1,22 +1,20 @@
 /* ============================================================
-   LABLINK – MAIN STYLESHEET (W4D1)
-   Includes AI purple (#5B2D8E) per spec.
+   LABLINK – STYLESHEET (W4D1 + D2 + D3)
+   Includes AI purple (#5B2D8E), three badges, pills, details, loading.
    ============================================================ */
 
-/* ----- CSS Variables (compulsory) ----- */
 :root {
     --color-navy: #1A2A4A;
     --color-teal: #0D9488;
     --color-gold: #D4A02B;
     --color-bg: #F8FAFC;
-    --color-ai: #5B2D8E;          /* AI Purple – must match spec */
+    --color-ai: #5B2D8E;
     --color-white: #ffffff;
     --color-gray: #64748B;
     --color-light-gray: #E2E8F0;
     --font-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* ----- Reset & Base ----- */
 * {
     margin: 0;
     padding: 0;
@@ -51,16 +49,14 @@ body {
     transition: all 0.2s ease;
     font-size: 1rem;
 }
-
 .btn-primary {
     background-color: var(--color-navy);
     color: white;
     border-color: var(--color-navy);
 }
 .btn-primary:hover {
-    background-color: #2c4270;
+    background-color: #2c4270;  /* 悬停变暗 */
 }
-
 .btn-outline {
     background-color: transparent;
     color: var(--color-navy);
@@ -70,7 +66,6 @@ body {
     background-color: var(--color-navy);
     color: white;
 }
-
 .btn-secondary {
     background-color: var(--color-teal);
     color: white;
@@ -82,10 +77,13 @@ body {
 .btn-secondary:hover {
     opacity: 0.85;
 }
-
 .btn-large {
     padding: 16px 48px;
     font-size: 1.2rem;
+}
+.btn-sm {
+    padding: 6px 16px;
+    font-size: 0.85rem;
 }
 
 /* ----- Navigation ----- */
@@ -95,20 +93,17 @@ body {
     border-bottom: 1px solid var(--color-light-gray);
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
-
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 .logo {
     font-size: 1.6rem;
     font-weight: 700;
     color: var(--color-navy);
     letter-spacing: -0.5px;
 }
-
 .nav-link {
     margin-left: 28px;
     color: var(--color-gray);
@@ -120,13 +115,12 @@ body {
     color: var(--color-navy);
 }
 
-/* ----- Hero ----- */
+/* ----- Hero (首页) ----- */
 .hero {
     padding: 72px 0 56px;
     text-align: center;
     background: linear-gradient(180deg, #f0f4ff 0%, white 100%);
 }
-
 .hero h1 {
     font-size: 3.2rem;
     font-weight: 800;
@@ -134,14 +128,12 @@ body {
     max-width: 800px;
     margin: 0 auto 16px;
 }
-
 .subheadline {
     font-size: 1.25rem;
     color: var(--color-gray);
     max-width: 600px;
     margin: 0 auto 32px;
 }
-
 .cta-group {
     display: flex;
     gap: 16px;
@@ -149,7 +141,7 @@ body {
     flex-wrap: wrap;
 }
 
-/* ----- AI Callout () ----- */
+/* ----- AI Callout ----- */
 .ai-callout {
     background: #f5f0fa;
     border-top: 3px solid var(--color-ai);
@@ -157,7 +149,6 @@ body {
     padding: 32px 0;
     margin: 0;
 }
-
 .ai-badge {
     display: inline-block;
     background: var(--color-ai);
@@ -169,7 +160,6 @@ body {
     letter-spacing: 0.5px;
     margin-bottom: 12px;
 }
-
 .ai-callout-text {
     font-size: 1.2rem;
     max-width: 800px;
@@ -184,19 +174,16 @@ body {
     padding: 64px 0;
     background: white;
 }
-
 .how-it-works h2 {
     text-align: center;
     font-size: 2.4rem;
     margin-bottom: 48px;
 }
-
 .steps-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 32px;
 }
-
 .step-card {
     text-align: center;
     padding: 24px 16px;
@@ -207,7 +194,6 @@ body {
 .step-card:hover {
     transform: translateY(-4px);
 }
-
 .step-number {
     width: 48px;
     height: 48px;
@@ -221,7 +207,6 @@ body {
     font-size: 1.4rem;
     margin: 0 auto 16px;
 }
-
 .step-card h3 {
     font-size: 1.1rem;
     margin-bottom: 8px;
@@ -237,27 +222,24 @@ body {
     color: white;
     padding: 28px 0;
 }
-
 .stats-grid {
     display: flex;
     justify-content: space-around;
     font-size: 1.1rem;
 }
-
 .stats-grid strong {
     font-size: 1.8rem;
     display: inline-block;
     margin-right: 4px;
 }
 
-/* ----- Footer ----- */
+/* ----- Footer + AI Attribution ----- */
 .footer {
     background: white;
     border-top: 1px solid var(--color-light-gray);
     padding: 24px 0;
     margin-top: auto;
 }
-
 .footer-content {
     display: flex;
     justify-content: space-between;
@@ -274,16 +256,22 @@ body {
 .footer-content nav a:hover {
     color: var(--color-navy);
 }
+.ai-attribution {
+    color: var(--color-gray);
+    font-size: 0.9rem;
+}
+.ai-attribution strong {
+    color: var(--color-ai);
+}
 
 /* ============================================================
-   CANDIDATE PROFILE FORM SPECIFIC STYLES
+   CANDIDATE PROFILE FORM (W4D1)
    ============================================================ */
 .form-page {
     padding: 40px 0 60px;
     background: var(--color-bg);
     flex: 1;
 }
-
 .form-container {
     max-width: 900px;
     margin: 0 auto;
@@ -292,7 +280,6 @@ body {
     padding: 40px 48px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
-
 .form-container h1 {
     font-size: 2.2rem;
     margin-bottom: 4px;
@@ -301,23 +288,18 @@ body {
     color: var(--color-gray);
     margin-bottom: 32px;
 }
-
-/* Form Sections */
 .form-section {
     border: none;
     border-bottom: 1px solid var(--color-light-gray);
     padding: 0 0 28px 0;
     margin-bottom: 28px;
 }
-
 .form-section legend {
     font-weight: 700;
     font-size: 1.2rem;
     padding: 0 4px 8px 0;
     width: 100%;
 }
-
-/* AI Section special treatment () */
 .ai-section {
     border-left: 4px solid var(--color-ai);
     padding-left: 20px;
@@ -333,26 +315,21 @@ body {
     margin-left: 10px;
     vertical-align: middle;
 }
-
-/* Form Rows & Groups */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
 }
-
 .form-group {
     display: flex;
     flex-direction: column;
     gap: 6px;
     margin-bottom: 8px;
 }
-
 .form-group label {
     font-weight: 600;
     font-size: 0.95rem;
 }
-
 .form-group select,
 .form-group input[type="text"] {
     padding: 10px 14px;
@@ -368,12 +345,12 @@ body {
     border-color: var(--color-navy);
 }
 
-/* ----- AI Textarea — 紫色边框（硬性要求） ----- */
+/* ----- AI Textarea (紫色边框) ----- */
 #researchStatement {
     width: 100%;
     min-height: 150px;
     padding: 16px;
-    border: 2px solid var(--color-ai);    /* 紫色边框，符合文档 */
+    border: 2px solid var(--color-ai);
     border-radius: 14px;
     font-family: var(--font-base);
     font-size: 1rem;
@@ -385,11 +362,9 @@ body {
     outline: none;
     box-shadow: 0 0 0 4px rgba(91, 45, 142, 0.15);
 }
-
-
 .ai-hint {
-    color: var(--color-ai);           /*  #5B2D8E */
-    font-size: 0.875rem;             
+    color: var(--color-ai);
+    font-size: 0.875rem;
     margin-top: 8px;
     font-weight: 500;
 }
@@ -409,14 +384,12 @@ body {
     flex: 1;
     min-width: 120px;
 }
-
 .skill-tag-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin: 12px 0 6px;
 }
-
 .skill-tag {
     background: #eef2ff;
     padding: 6px 14px 6px 18px;
@@ -438,11 +411,6 @@ body {
     margin-left: 4px;
     font-size: 1.1rem;
 }
-.skill-tag .remove-skill:hover {
-    color: #7f1d1d;
-}
-
-/* Radio groups */
 .radio-group {
     display: flex;
     flex-wrap: wrap;
@@ -456,14 +424,378 @@ body {
     gap: 6px;
     cursor: pointer;
 }
-
-/* Form Actions */
 .form-actions {
     margin-top: 12px;
     text-align: center;
 }
 
-/* ----- Responsive ----- */
+/* ============================================================
+   RESULTS PAGE (W4D2 + D3)
+   ============================================================ */
+.results-page {
+    padding: 40px 0 60px;
+    flex: 1;
+}
+.results-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 4px;
+}
+.results-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px 0 24px;
+    padding: 12px 16px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--color-light-gray);
+}
+.sort-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.sort-group select {
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--color-light-gray);
+    font-size: 0.95rem;
+}
+
+/* ----- Lab Cards Grid (2列) ----- */
+.lab-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+.lab-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid var(--color-light-gray);
+    transition: box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+.lab-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+
+/* ----- 三色徽章行 (D2) ----- */
+.score-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: center;
+}
+.badge {
+    display: inline-block;
+    border-radius: 12px;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+}
+.badge-teal {
+    background: var(--color-teal);
+}
+.badge-purple {
+    background: var(--color-ai);
+    position: relative;
+    cursor: help;
+}
+.badge-combined {
+    background: var(--color-navy);
+    border-radius: 16px;
+    padding: 6px 16px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* ----- 紫色徽章 Tooltip (D2) ----- */
+.badge-purple .tooltip-icon {
+    margin-left: 4px;
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
+.badge-purple .tooltip-text {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 400;
+    white-space: normal;
+    min-width: 220px;
+    max-width: 300px;
+    text-align: center;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.badge-purple .tooltip-text::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #1e293b;
+}
+.badge-purple:hover .tooltip-text {
+    display: block;
+}
+
+/* ----- 卡片内容 ----- */
+.lab-name {
+    font-size: 1.2rem;
+    margin: 4px 0 6px;
+}
+.lab-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: 0.9rem;
+    color: var(--color-gray);
+    margin-bottom: 8px;
+}
+.lab-skills {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    color: var(--color-navy);
+}
+.card-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 12px;
+}
+
+/* ----- Pill 药丸标签 (D3) ----- */
+.pill {
+    display: inline-block;
+    background: #eef2ff;
+    color: var(--color-navy);
+    padding: 2px 12px;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.field-pill {
+    background: var(--color-navy);
+    color: white;
+}
+.pill-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+/* ----- “Why this match?” 折叠区 (D3) ----- */
+.why-match-details {
+    margin-top: 14px;
+    border-top: 1px dashed var(--color-light-gray);
+    padding-top: 12px;
+}
+.why-match-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-navy);
+    padding: 4px 0;
+    user-select: none;
+}
+.why-match-details summary:hover {
+    color: var(--color-ai);
+}
+.why-match-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 12px;
+    padding: 16px;
+    background: var(--color-bg);
+    border-radius: 12px;
+}
+.why-heading {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+.teal-heading {
+    color: var(--color-teal);
+}
+.purple-heading {
+    color: var(--color-ai);
+}
+.why-list {
+    list-style: none;
+    padding: 0;
+    font-size: 0.9rem;
+}
+.why-list li {
+    padding: 2px 0;
+    border-bottom: 1px solid #eef2f6;
+}
+.why-list li:last-child {
+    border-bottom: none;
+}
+.ai-percent {
+    font-size: 1.1rem;
+    margin: 4px 0;
+}
+.ai-reason {
+    font-size: 0.95rem;
+    color: var(--color-gray);
+    line-height: 1.5;
+}
+
+/* ----- 加载状态 (D3) ----- */
+.loading-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+.spinner {
+    border: 4px solid var(--color-light-gray);
+    border-top: 4px solid var(--color-ai);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 16px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loading-sub {
+    font-size: 0.9rem;
+    color: var(--color-gray);
+}
+
+/* ----- 空状态 (D3) ----- */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--color-light-gray);
+}
+.empty-state p {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+.empty-hint {
+    font-size: 1rem;
+    color: var(--color-gray);
+    margin-bottom: 20px;
+}
+
+/* ============================================================
+   LAB PROFILE PAGE (W4D2)
+   ============================================================ */
+.lab-profile-page {
+    padding: 32px 0 60px;
+    flex: 1;
+}
+.back-nav {
+    margin-bottom: 24px;
+}
+.back-link {
+    color: var(--color-gray);
+    text-decoration: none;
+    font-weight: 500;
+}
+.back-link:hover {
+    color: var(--color-navy);
+}
+
+.lab-header {
+    margin-bottom: 28px;
+}
+.lab-header h1 {
+    font-size: 2.4rem;
+    margin-bottom: 4px;
+}
+.lab-header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    color: var(--color-gray);
+    font-size: 1rem;
+    align-items: center;
+}
+
+.profile-section {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    border: 1px solid var(--color-light-gray);
+}
+.profile-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+}
+.lab-description-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #1e293b;
+}
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 32px;
+}
+.info-grid strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 2px;
+    font-size: 0.9rem;
+    color: var(--color-gray);
+}
+
+/* 分数栏 (底部) */
+.score-section {
+    border-left: 4px solid var(--color-ai);
+}
+.score-badge-row-large .badge {
+    font-size: 1rem;
+    padding: 6px 18px;
+}
+.score-badge-row-large .badge-combined {
+    font-size: 1.2rem;
+    padding: 8px 22px;
+}
+.score-hint {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: var(--color-gray);
+}
+.score-hint a {
+    color: var(--color-ai);
+    text-decoration: none;
+}
+.score-hint a:hover {
+    text-decoration: underline;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+}
+
+/* ============================================================
+   RESPONSIVE (D3: 375px 适配)
+   ============================================================ */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.2rem; }
     .steps-grid { grid-template-columns: 1fr 1fr; }
@@ -472,10 +804,20 @@ body {
     .stats-grid { flex-direction: column; align-items: center; gap: 8px; }
     .footer-content { flex-direction: column; text-align: center; }
     .footer-content nav a { margin: 0 12px; }
+    .lab-cards-grid { grid-template-columns: 1fr; }  /* 结果页单列 */
+    .why-match-grid { grid-template-columns: 1fr; }   /* 折叠区单列 */
+    .info-grid { grid-template-columns: 1fr; }        /* 详情页单列 */
+    .results-toolbar { flex-direction: column; gap: 12px; align-items: stretch; }
+    .lab-header h1 { font-size: 1.8rem; }
 }
 
 @media (max-width: 480px) {
     .steps-grid { grid-template-columns: 1fr; }
     .cta-group { flex-direction: column; align-items: center; }
     .nav-container { flex-wrap: wrap; gap: 12px; }
+    .score-badge-row { gap: 6px; }
+    .badge { font-size: 0.7rem; padding: 2px 10px; }
+    .badge-combined { font-size: 0.85rem; padding: 4px 12px; }
+    .profile-section { padding: 16px; }
+    .score-badge-row-large .badge { font-size: 0.85rem; padding: 4px 12px; }
 }
