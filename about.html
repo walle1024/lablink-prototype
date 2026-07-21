@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabLink – About & User Guide</title>
+    <link rel="stylesheet" href="styles/main.css" />
+
+    <style>
+        .about-hero {
+            background: var(--color-bg);
+            padding: 50px 0 30px;
+            border-bottom: 2px solid var(--color-light-gray);
+        }
+        .about-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 8px;
+        }
+        .about-hero p {
+            font-size: 1.2rem;
+            color: var(--color-gray);
+            max-width: 700px;
+        }
+        .about-section {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--color-light-gray);
+        }
+        .about-section:last-of-type {
+            border-bottom: none;
+        }
+        .about-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--color-navy);
+        }
+        .about-section h3 {
+            font-size: 1.3rem;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: var(--color-navy);
+        }
+        .about-section p, .about-section li {
+            color: #1e293b;
+            line-height: 1.7;
+            max-width: 800px;
+        }
+        .about-section ul {
+            padding-left: 24px;
+        }
+        .about-section li {
+            margin-bottom: 8px;
+        }
+        .badge-demo {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 8px;
+            color: white;
+        }
+        .badge-teal { background: var(--color-teal); }
+        .badge-purple { background: var(--color-ai); }
+        .badge-combined { background: var(--color-navy); padding: 6px 16px; border-radius: 16px; font-size: 1rem; }
+
+     
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 800px;
+        }
+        .faq-item {
+            border: 1px solid var(--color-light-gray);
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+        }
+        .faq-item summary {
+            padding: 18px 24px;
+            font-weight: 700;
+            cursor: pointer;
+            background: #f8fafc;
+            transition: background 0.2s;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-item summary:hover {
+            background: #f1f5f9;
+        }
+  
+        .faq-item summary::after {
+            content: "▸";
+            font-size: 1.4rem;
+            color: var(--color-ai);
+            transition: transform 0.2s;
+        }
+        .faq-item[open] summary::after {
+            content: "▾";
+        }
+        .faq-item .faq-answer {
+            padding: 0 24px 24px 24px;
+            color: #334155;
+            line-height: 1.7;
+        }
+        .faq-item .faq-answer strong {
+            color: var(--color-navy);
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo"><a href="/" style="color:inherit;text-decoration:none;">LabLink</a></div>
+            <nav>
+                <a href="/pages/candidate-profile.html" class="nav-link">Find a Lab</a>
+                <a href="#" class="nav-link">Register Lab</a>
+                <a href="/about.html" class="nav-link active">About</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <main>
+
+ 
+        <section class="about-hero">
+            <div class="container">
+                <h1>About LabLink</h1>
+                <p>The smartest way to connect students and researchers with labs that match their skills, research interests, and career goals.</p>
+            </div>
+        </section>
+
+
+        <section class="about-section">
+            <div class="container">
+                <h2>What is LabLink?</h2>
+                <p>
+                    LabLink is a research lab matching platform built for the modern academic ecosystem. 
+                    It combines <strong>structured data</strong> (your skills, education, and field interests) with 
+                    <strong>AI-powered semantic analysis</strong> (your research statement) to find the best lab fit for you.
+                </p>
+                <p>
+                    Whether you are an undergraduate looking for your first wet-lab experience, a postbac aiming for a PhD pipeline, 
+                    or a Master's student exploring industry pathways — LabLink helps you discover labs that align with your unique profile.
+                </p>
+            </div>
+        </section>
+
+  
+        <section class="about-section">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 800px;">
+                    <div style="background: var(--color-bg); padding: 20px; border-radius: 16px;">
+                        <strong style="color: var(--color-navy);">1. Build your profile</strong>
+                        <p style="margin-top: 6px; font-size: 0.95rem;">Fill in your education, skills, and research interests from our structured lists.</p>
+                    </div>
+                    <div style="background: var(--color-bg); padding: 20px; border-radius: 16px;">
+                        <strong style="color: var(--color-navy);">2. Write your story</strong>
+                        <p style="margin-top: 6px; font-size: 0.95rem;">Tell us in your own words what excites you about research — this feeds our AI.</p>
+                    </div>
+                    <div style="background: var(--color-bg); padding: 20px; border-radius: 16px;">
+                        <strong style="color: var(--color-navy);">3. AI + Algorithm Match</strong>
+                        <p style="margin-top: 6px; font-size: 0.95rem;">Our system blends rule-based scoring with semantic AI similarity for smarter results.</p>
+                    </div>
+                    <div style="background: var(--color-bg); padding: 20px; border-radius: 16px;">
+                        <strong style="color: var(--color-navy);">4. Connect with labs</strong>
+                        <p style="margin-top: 6px; font-size: 0.95rem;">View your ranked matches and reach out to the labs that fit you best.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="about-section">
+            <div class="container">
+                <h2>Understanding Your Match Score</h2>
+                <p>On your results page, you'll see <strong>three badges</strong> for each lab. Here is what they mean:</p>
+
+                <div style="margin-top: 24px; max-width: 800px;">
+                    <div style="margin-bottom: 24px; padding: 20px; background: #f0fdfa; border-radius: 12px; border-left: 6px solid var(--color-teal);">
+                        <div><span class="badge-demo badge-teal">Structure: 78%</span></div>
+                        <h3 style="margin-top: 8px; font-size: 1.2rem;">Teal Badge – Structure Score</h3>
+                        <p>This shows how well your <strong>skills, education, and career goals</strong> match the lab's requirements. 
+                        It is based on the structured information you provided — like techniques you know, your field of interest, and your availability.</p>
+                    </div>
+
+                    <div style="margin-bottom: 24px; padding: 20px; background: #f5f0fa; border-radius: 12px; border-left: 6px solid var(--color-ai);">
+                        <div><span class="badge-demo badge-purple">AI Semantic: 82%</span></div>
+                        <h3 style="margin-top: 8px; font-size: 1.2rem;">Purple Badge – AI Semantic Score</h3>
+                        <p>This is powered by <strong>AI</strong>. Our system reads your research statement and the lab's description, 
+                        then measures <strong>how similar the topics are</strong>. It understands the <em>meaning</em> of your words — not just exact keywords.</p>
+                        <p style="margin-top: 8px; font-style: italic; color: #4A1D7A;">✨ Example: If you write "gene editing" and the lab says "CRISPR," the AI recognises they are related and gives you credit.</p>
+                    </div>
+
+                    <div style="padding: 20px; background: #f1f5f9; border-radius: 12px; border-left: 6px solid var(--color-navy);">
+                        <div><span class="badge-demo badge-combined">Match: 79%</span></div>
+                        <h3 style="margin-top: 8px; font-size: 1.2rem;">Bold Combined Score</h3>
+                        <p>This blends both scores (<strong>70% structure + 30% AI</strong>) to give you an overall match percentage. 
+                        This is the number you should care about most — it represents the total fit between you and the lab.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="about-section">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-list">
+
+                    <details class="faq-item">
+                        <summary>Is the AI reading my personal data?</summary>
+                        <div class="faq-answer">
+                            <p><strong>A:</strong> Yes, the AI reads your research statement to find matching labs. 
+                            We do <strong>not</strong> store or share your personal data with third parties beyond the Cohere AI service used for matching. 
+                            Your privacy is important — we only process your text temporarily to generate your match results.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>What if I don't know many techniques?</summary>
+                        <div class="faq-answer">
+                            <p><strong>A:</strong> That's okay! The AI can still find labs based on your research interests. 
+                            Your research statement matters more than a long list of skills. 
+                            Focus on describing what you are <em>curious</em> about and what you want to <em>learn</em>.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Why is the AI score sometimes higher than the structure score?</summary>
+                        <div class="faq-answer">
+                            <p><strong>A:</strong> The AI may recognise that your research interests align with a lab's work, 
+                            even if your exact skills don't match perfectly. It is finding <strong>hidden connections</strong> 
+                            — for example, a shared focus on neurodegeneration or a common experimental model.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Can I see why a lab was recommended?</summary>
+                        <div class="faq-answer">
+                            <p><strong>A:</strong> Yes! Click <strong>"Why this match?"</strong> on any lab card. 
+                            You'll see both the <strong>structured reasons</strong> (like skill matches and field alignment) 
+                            and the <strong>AI explanation</strong> (a plain-English summary of why your research statement fits).</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>How do I get better match results?</summary>
+                        <div class="faq-answer">
+                            <p><strong>A:</strong> Write a <strong>specific research statement</strong> — mention a research topic, 
+                            techniques you've used (or want to learn), and your long-term goal. 
+                            The AI works best with detailed, vocabulary-rich text. For example, instead of "I like biology," 
+                            try "I am interested in how epigenetic modifications regulate stem cell differentiation."</p>
+                        </div>
+                    </details>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <span>&copy; 2026 LabLink. Semantic matching powered by Cohere Embed AI.</span>
+            <nav>
+                <a href="/about.html">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+</html>
